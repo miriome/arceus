@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 
-	pb "arceus/app/common/protobuf"
+	pb "github.com/miromie/arceus/app/common/protobuf"
 )
 
 type Server struct{}

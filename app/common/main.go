@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	pb "arceus/app/common/protobuf"
-	"arceus/app/common/server"
+	pb "github.com/miromie/arceus/app/common/protobuf"
+	"github.com/miromie/arceus/app/common/server"
 )
 
 func main() {
