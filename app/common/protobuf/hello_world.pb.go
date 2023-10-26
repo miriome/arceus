@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        v4.24.4
-// source: protobuf/hello_world.proto
+// source: common/protobuf/hello_world.proto
 
 package protobuf
 
@@ -31,7 +31,7 @@ type HelloReq struct {
 func (x *HelloReq) Reset() {
 	*x = HelloReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protobuf_hello_world_proto_msgTypes[0]
+		mi := &file_common_protobuf_hello_world_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -44,7 +44,7 @@ func (x *HelloReq) String() string {
 func (*HelloReq) ProtoMessage() {}
 
 func (x *HelloReq) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_hello_world_proto_msgTypes[0]
+	mi := &file_common_protobuf_hello_world_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *HelloReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloReq.ProtoReflect.Descriptor instead.
 func (*HelloReq) Descriptor() ([]byte, []int) {
-	return file_protobuf_hello_world_proto_rawDescGZIP(), []int{0}
+	return file_common_protobuf_hello_world_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *HelloReq) GetSubject() string {
@@ -78,7 +78,7 @@ type HelloResp struct {
 func (x *HelloResp) Reset() {
 	*x = HelloResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protobuf_hello_world_proto_msgTypes[1]
+		mi := &file_common_protobuf_hello_world_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -91,7 +91,7 @@ func (x *HelloResp) String() string {
 func (*HelloResp) ProtoMessage() {}
 
 func (x *HelloResp) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_hello_world_proto_msgTypes[1]
+	mi := &file_common_protobuf_hello_world_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +104,7 @@ func (x *HelloResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResp.ProtoReflect.Descriptor instead.
 func (*HelloResp) Descriptor() ([]byte, []int) {
-	return file_protobuf_hello_world_proto_rawDescGZIP(), []int{1}
+	return file_common_protobuf_hello_world_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *HelloResp) GetText() string {
@@ -114,45 +114,44 @@ func (x *HelloResp) GetText() string {
 	return ""
 }
 
-var File_protobuf_hello_world_proto protoreflect.FileDescriptor
+var File_common_protobuf_hello_world_proto protoreflect.FileDescriptor
 
-var file_protobuf_hello_world_proto_rawDesc = []byte{
-	0x0a, 0x1a, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x68, 0x65, 0x6c, 0x6c, 0x6f,
-	0x5f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x11, 0x61, 0x72,
-	0x63, 0x65, 0x75, 0x73, 0x2e, 0x61, 0x70, 0x70, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x22,
-	0x24, 0x0a, 0x08, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x73,
-	0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x75,
-	0x62, 0x6a, 0x65, 0x63, 0x74, 0x22, 0x1f, 0x0a, 0x09, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65,
-	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x74, 0x65, 0x78, 0x74, 0x32, 0x50, 0x0a, 0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x57,
-	0x6f, 0x72, 0x6c, 0x64, 0x12, 0x42, 0x0a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x1b, 0x2e,
-	0x61, 0x72, 0x63, 0x65, 0x75, 0x73, 0x2e, 0x61, 0x70, 0x70, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x1c, 0x2e, 0x61, 0x72, 0x63,
-	0x65, 0x75, 0x73, 0x2e, 0x61, 0x70, 0x70, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x48,
-	0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2f, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+var file_common_protobuf_hello_world_proto_rawDesc = []byte{
+	0x0a, 0x21, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2f, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x5f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x12, 0x06, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x22, 0x24, 0x0a, 0x08, 0x48,
+	0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x62, 0x6a, 0x65,
+	0x63, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x22, 0x1f, 0x0a, 0x09, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12,
+	0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x65,
+	0x78, 0x74, 0x32, 0x3a, 0x0a, 0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x57, 0x6f, 0x72, 0x6c, 0x64,
+	0x12, 0x2c, 0x0a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x10, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x11, 0x2e, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x42, 0x0c,
+	0x5a, 0x0a, 0x2e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_protobuf_hello_world_proto_rawDescOnce sync.Once
-	file_protobuf_hello_world_proto_rawDescData = file_protobuf_hello_world_proto_rawDesc
+	file_common_protobuf_hello_world_proto_rawDescOnce sync.Once
+	file_common_protobuf_hello_world_proto_rawDescData = file_common_protobuf_hello_world_proto_rawDesc
 )
 
-func file_protobuf_hello_world_proto_rawDescGZIP() []byte {
-	file_protobuf_hello_world_proto_rawDescOnce.Do(func() {
-		file_protobuf_hello_world_proto_rawDescData = protoimpl.X.CompressGZIP(file_protobuf_hello_world_proto_rawDescData)
+func file_common_protobuf_hello_world_proto_rawDescGZIP() []byte {
+	file_common_protobuf_hello_world_proto_rawDescOnce.Do(func() {
+		file_common_protobuf_hello_world_proto_rawDescData = protoimpl.X.CompressGZIP(file_common_protobuf_hello_world_proto_rawDescData)
 	})
-	return file_protobuf_hello_world_proto_rawDescData
+	return file_common_protobuf_hello_world_proto_rawDescData
 }
 
-var file_protobuf_hello_world_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_protobuf_hello_world_proto_goTypes = []interface{}{
-	(*HelloReq)(nil),  // 0: arceus.app.common.HelloReq
-	(*HelloResp)(nil), // 1: arceus.app.common.HelloResp
+var file_common_protobuf_hello_world_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_common_protobuf_hello_world_proto_goTypes = []interface{}{
+	(*HelloReq)(nil),  // 0: common.HelloReq
+	(*HelloResp)(nil), // 1: common.HelloResp
 }
-var file_protobuf_hello_world_proto_depIdxs = []int32{
-	0, // 0: arceus.app.common.HelloWorld.Hello:input_type -> arceus.app.common.HelloReq
-	1, // 1: arceus.app.common.HelloWorld.Hello:output_type -> arceus.app.common.HelloResp
+var file_common_protobuf_hello_world_proto_depIdxs = []int32{
+	0, // 0: common.HelloWorld.Hello:input_type -> common.HelloReq
+	1, // 1: common.HelloWorld.Hello:output_type -> common.HelloResp
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -160,13 +159,13 @@ var file_protobuf_hello_world_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_protobuf_hello_world_proto_init() }
-func file_protobuf_hello_world_proto_init() {
-	if File_protobuf_hello_world_proto != nil {
+func init() { file_common_protobuf_hello_world_proto_init() }
+func file_common_protobuf_hello_world_proto_init() {
+	if File_common_protobuf_hello_world_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_protobuf_hello_world_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_common_protobuf_hello_world_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HelloReq); i {
 			case 0:
 				return &v.state
@@ -178,7 +177,7 @@ func file_protobuf_hello_world_proto_init() {
 				return nil
 			}
 		}
-		file_protobuf_hello_world_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_common_protobuf_hello_world_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HelloResp); i {
 			case 0:
 				return &v.state
@@ -195,18 +194,18 @@ func file_protobuf_hello_world_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_protobuf_hello_world_proto_rawDesc,
+			RawDescriptor: file_common_protobuf_hello_world_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_protobuf_hello_world_proto_goTypes,
-		DependencyIndexes: file_protobuf_hello_world_proto_depIdxs,
-		MessageInfos:      file_protobuf_hello_world_proto_msgTypes,
+		GoTypes:           file_common_protobuf_hello_world_proto_goTypes,
+		DependencyIndexes: file_common_protobuf_hello_world_proto_depIdxs,
+		MessageInfos:      file_common_protobuf_hello_world_proto_msgTypes,
 	}.Build()
-	File_protobuf_hello_world_proto = out.File
-	file_protobuf_hello_world_proto_rawDesc = nil
-	file_protobuf_hello_world_proto_goTypes = nil
-	file_protobuf_hello_world_proto_depIdxs = nil
+	File_common_protobuf_hello_world_proto = out.File
+	file_common_protobuf_hello_world_proto_rawDesc = nil
+	file_common_protobuf_hello_world_proto_goTypes = nil
+	file_common_protobuf_hello_world_proto_depIdxs = nil
 }
