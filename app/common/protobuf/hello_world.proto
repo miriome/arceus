@@ -1,5 +1,5 @@
 syntax = "proto3";
-package arceus.app.common;
+package common;
 option go_package = "./protobuf";
 
 service HelloWorld {
