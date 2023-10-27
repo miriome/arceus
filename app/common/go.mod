@@ -1,8 +1,10 @@
-module github.com/miromie/arceus/app/common
+module arceus/app/common
 
 go 1.21.3
 
 require (
-	github.com/twitchtv/twirp v8.1.3+incompatible // indirect
+	connectrpc.com/connect v1.12.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 )

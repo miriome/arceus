@@ -1,16 +1,20 @@
 package server
 
 import (
+	"arceus/app/common/gen/protobuf"
+	"connectrpc.com/connect"
 	"context"
-
-	pb "github.com/miromie/arceus/app/common/protobuf"
 )
 
 type Server struct{}
 
-func (s *Server) Hello(ctx context.Context, req *pb.HelloReq) (resp *pb.HelloResp, err error) {
-	return &pb.HelloResp{
-		Text: "hello",
-	}, nil
-
+func (s *Server) Hello(context.Context, *connect.Request[protobuf.HelloRequest]) (*connect.Response[protobuf.HelloResponse], error) {
+	res := connect.NewResponse(&protobuf.HelloResponse{Text: "hello"})
+	return res, nil
 }
+
+//func (s *Server) Hello(ctx context.Context, req *connect.Request[pb.HelloRequest]) (resp *connect.Response[pb.HelloResponse], err error) {
+//	res := connect.NewResponse(&pb.HelloResponse{Text: "hello"})
+//	return res, nil
+//
+//}

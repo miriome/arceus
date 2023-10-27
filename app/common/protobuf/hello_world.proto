@@ -1,15 +1,15 @@
 syntax = "proto3";
-package common;
-option go_package = "./protobuf";
+package protobuf.v1;
+option go_package = "arceus/app/common/gen/protobuf";
 
-service HelloWorld {
-  rpc Hello(HelloReq) returns (HelloResp);
+service HelloWorldService {
+  rpc Hello(HelloRequest) returns (HelloResponse);
 }
 
-message HelloReq {
+message HelloRequest {
   string subject = 1;
 }
 
-message HelloResp {
+message HelloResponse {
   string text = 1;
 }
