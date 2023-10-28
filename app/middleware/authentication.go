@@ -21,7 +21,7 @@ func authentication(next http.Handler) http.Handler {
 
 		token, error := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) { return []byte(key), nil })
 		if error != nil {
-			http.Error(writer, fmt.Sprint("%v", error), http.StatusUnauthorized)
+			http.Error(writer, fmt.Sprintf("%v", error), http.StatusUnauthorized)
 			return
 		}
 
