@@ -1,9 +1,9 @@
 package server
 
 import (
-	"arceus/app/auth/gen/miromie-local/model"
-	"arceus/app/auth/gen/miromie-local/table"
-	"arceus/app/auth/gen/protobuf"
+	"auth/gen/miromie-local/model"
+	"auth/gen/miromie-local/table"
+	"auth/gen/protobuf"
 	"connectrpc.com/connect"
 	"context"
 	"database/sql"

@@ -1,8 +1,8 @@
 package main
 
 import (
-	connect "arceus/app/auth/gen/protobuf/protobufconnect"
-	"arceus/app/auth/server"
+	connect "auth/gen/protobuf/protobufconnect"
+	"auth/server"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -33,8 +33,8 @@ func main() {
 
 	mux.Handle(path, handler)
 	fmt.Println("Serving 8081 localhost")
-	certPath := "../localhost.cert"
-	keyPath := "../localhost.key"
+	certPath := "./localhost.cert"
+	keyPath := "./localhost.key"
 
 	err = http.ListenAndServeTLS("localhost:8081", certPath, keyPath, mux)
 

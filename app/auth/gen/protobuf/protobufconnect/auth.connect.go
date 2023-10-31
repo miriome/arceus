@@ -5,7 +5,7 @@
 package protobufconnect
 
 import (
-	protobuf "arceus/app/auth/gen/protobuf"
+	protobuf "auth/gen/protobuf"
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
