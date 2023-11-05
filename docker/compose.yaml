@@ -1,0 +1,6 @@
+services:
+  auth:
+    build: ../app/auth
+    ports:
+      - "8000:5000"
+  

@@ -19,6 +19,6 @@ func main() {
 	path, handler := connect.NewHelloWorldServiceHandler(sv)
 
 	mux.Handle(path, handler)
-	http.ListenAndServeTLS(":8080", fmt.Sprintf("%v/localhost.cert", workPath), fmt.Sprintf("%v/localhost.key", workPath), handler)
+	http.ListenAndServeTLS(":50001", fmt.Sprintf("%v/localhost.cert", workPath), fmt.Sprintf("%v/localhost.key", workPath), handler)
 
 }
