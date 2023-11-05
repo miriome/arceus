@@ -1,6 +1,9 @@
 services:
   auth:
-    build: ../app/auth
+    build:
+      context: ../app/auth
+      dockerfile: Dockerfile-dev
+
     ports:
-      - "8000:5000"
+      - "8081:8081"
   
