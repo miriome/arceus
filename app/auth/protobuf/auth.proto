@@ -1,6 +1,6 @@
 syntax = "proto3";
 package protobuf;
-option go_package = "auth/gen/protobuf";
+option go_package = "github.com/arceus/app/auth/gen/protobuf";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);

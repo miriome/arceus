@@ -1,13 +1,13 @@
 package server
 
 import (
-	"auth/gen/miromie-local/model"
-	"auth/gen/miromie-local/table"
-	"auth/gen/protobuf"
 	"connectrpc.com/connect"
 	"context"
 	"database/sql"
 	"errors"
+	"github.com/arceus/app/auth/gen/miromie-local/model"
+	"github.com/arceus/app/auth/gen/miromie-local/table"
+	"github.com/arceus/app/auth/gen/protobuf"
 	. "github.com/go-jet/jet/v2/mysql"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"

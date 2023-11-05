@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1
+
+FROM golang:1.21.3 as build
+
+WORKDIR /auth
+RUN mkdir -p auth
+RUN mkdir -p middleware
+COPY auth ./auth
+COPY middleware ./middleware
+WORKDIR /auth/auth
+
+RUN go mod download
+RUN go install github.com/cosmtrek/air@latest
+
+EXPOSE 12345
+
+CMD air

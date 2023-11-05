@@ -1,4 +1,4 @@
-module github.com/miriome/arceus/app/middleware
+module github.com/arceus/app/middleware
 
 go 1.21.3
 

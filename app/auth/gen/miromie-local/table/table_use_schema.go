@@ -20,5 +20,6 @@ func UseSchema(schema string) {
 	Notifications = Notifications.FromSchema(schema)
 	Posts = Posts.FromSchema(schema)
 	Reports = Reports.FromSchema(schema)
+	SearchTerms = SearchTerms.FromSchema(schema)
 	Users = Users.FromSchema(schema)
 }

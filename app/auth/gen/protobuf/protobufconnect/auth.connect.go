@@ -5,10 +5,10 @@
 package protobufconnect
 
 import (
-	protobuf "auth/gen/protobuf"
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
+	protobuf "github.com/arceus/app/auth/gen/protobuf"
 	http "net/http"
 	strings "strings"
 )
