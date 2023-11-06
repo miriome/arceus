@@ -5,8 +5,11 @@ services:
       dockerfile: Dockerfile-dev
     ports:
       - "127.0.0.1:12345:12345"
+#    volumes: # For air to work.
+#      - ../app/auth:/auth/auth
+#      - ../app/middleware:/auth/middleware
 
-    # network mode doesnt work on mac wtf
+# network mode doesnt work on mac wtf
 
 #  nginx:
 #    image: nginx:latest
