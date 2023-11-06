@@ -5,9 +5,12 @@ FROM golang:1.21.3 as build
 WORKDIR /auth
 RUN mkdir -p auth
 RUN mkdir -p middleware
-COPY auth ./auth
-COPY middleware ./middleware
+## TODO: Once we have proper git going on, dont need to copy like ths anymore.
+COPY ./auth ./auth
+COPY ./middleware ./middleware
 WORKDIR /auth/auth
+# copy prod env
+ADD auth/.env.prod .env 
 
 RUN go mod download
 

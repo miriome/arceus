@@ -8,10 +8,11 @@ RUN mkdir -p middleware
 COPY auth ./auth
 COPY middleware ./middleware
 WORKDIR /auth/auth
+# Copy dev env
+ADD auth/.env.dev .env
 
 RUN go mod download
 RUN go install github.com/cosmtrek/air@latest
 
 EXPOSE 12345
-
 CMD air

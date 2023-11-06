@@ -2,9 +2,11 @@ services:
   auth:
     build:
       context: ../app
-      dockerfile: Dockerfile-dev
+      dockerfile: ../app/auth/Dockerfile-dev
     ports:
       - "127.0.0.1:12345:12345"
+    env_file:
+      - ../app/auth/.env.dev
 #    volumes: # For air to work.
 #      - ../app/auth:/auth/auth
 #      - ../app/middleware:/auth/middleware
