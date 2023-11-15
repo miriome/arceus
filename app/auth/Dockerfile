@@ -4,13 +4,17 @@ FROM golang:1.21.3 as build
 
 WORKDIR /auth
 RUN mkdir -p auth
-RUN mkdir -p middleware
+COPY auth ./auth
+
 ## TODO: Once we have proper git going on, dont need to copy like ths anymore.
-COPY ./auth ./auth
-COPY ./middleware ./middleware
+RUN mkdir -p middleware
+COPY middleware ./middleware
+
 WORKDIR /auth/auth
 # copy prod env
-ADD auth/.env.prod .env 
+COPY auth/prod.toml env.toml
+
+
 
 RUN go mod download
 
@@ -21,8 +25,7 @@ FROM gcr.io/distroless/base-debian11 as release
 WORKDIR /
 
 COPY --from=build /miromie-apiservice-auth /miromie-apiservice-auth
-COPY --from=build /auth/auth/localhost.key /localhost.key
-COPY --from=build /auth/auth/localhost.cert /localhost.cert
+COPY --from=build /auth/auth/env.toml /env.toml
 
 EXPOSE 12345
 

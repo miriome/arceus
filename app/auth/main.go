@@ -1,32 +1,38 @@
 package main
 
 import (
+	"connectrpc.com/grpchealth"
 	"database/sql"
 	"fmt"
 	connect "github.com/arceus/app/auth/gen/protobuf/protobufconnect"
 	"github.com/arceus/app/auth/server"
 	"github.com/arceus/app/middleware"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
-	viper.SetConfigFile(".env")
+	viper.AddConfigPath(".")
+	viper.SetConfigName("env")
+	viper.SetConfigType("toml")
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("Error reading config file, %s", err)
+		fmt.Printf("Error reading config file, %s\n", err)
+		os.Exit(1)
 	}
-
 	user := viper.Get("DB_USER")
 	password := viper.Get("DB_PASSWORD")
 	dbName := viper.Get("DB_NAME")
 	host := viper.Get("DB_HOST")
-	port := viper.Get("DB_PORT")
+	port := viper.GetInt("DB_PORT")
 
-	connectionString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&collation=utf8mb4_unicode_ci", user, password, host, port, dbName)
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s",
+		host, port, user, password, dbName)
 
-	db, err := sql.Open("mysql", connectionString)
+	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -35,16 +41,17 @@ func main() {
 	} // implements Server interface
 	mux := http.NewServeMux()
 
-	path, handler := connect.NewAuthServiceHandler(sv)
+	checker := grpchealth.NewStaticChecker(
+		connect.AuthServiceName,
+	)
 
-	mux.Handle(path, handler)
-	fmt.Println("Serving 12345 localhost")
-	certPath := "./localhost.cert"
-	keyPath := "./localhost.key"
+	mux.Handle(connect.NewAuthServiceHandler(sv))
+	mux.Handle(grpchealth.NewHandler(checker))
 
 	serverPort := viper.Get("SERVER_PORT")
+	fmt.Printf("Serving %s localhost\n", serverPort)
 
-	err = http.ListenAndServeTLS(fmt.Sprintf(":%s", serverPort), certPath, keyPath, middleware.LogRoute(mux))
+	err = http.ListenAndServe(fmt.Sprintf(":%s", serverPort), middleware.LogRoute(mux))
 
 	if err != nil {
 		log.Fatal(err)

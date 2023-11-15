@@ -4,12 +4,15 @@ FROM golang:1.21.3 as build
 
 WORKDIR /auth
 RUN mkdir -p auth
-RUN mkdir -p middleware
 COPY auth ./auth
+
+## TODO: Once we have proper git going on, dont need to copy like ths anymore.
+RUN mkdir -p middleware
 COPY middleware ./middleware
+
 WORKDIR /auth/auth
 # Copy dev env
-ADD auth/.env.dev .env
+COPY auth/dev.toml env.toml
 
 RUN go mod download
 RUN go install github.com/cosmtrek/air@latest
