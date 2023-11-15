@@ -9,6 +9,8 @@ import (
 	"github.com/arceus/app/middleware"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/h2c"
 	"log"
 	"net/http"
 	"os"
@@ -50,8 +52,10 @@ func main() {
 
 	serverPort := viper.Get("SERVER_PORT")
 	fmt.Printf("Serving %s localhost\n", serverPort)
-
-	err = http.ListenAndServe(fmt.Sprintf(":%s", serverPort), middleware.LogRoute(mux))
+	err = http.ListenAndServe(
+		fmt.Sprintf(":%s", serverPort),
+		h2c.NewHandler(middleware.LogRoute(mux), &http2.Server{}),
+	)
 
 	if err != nil {
 		log.Fatal(err)

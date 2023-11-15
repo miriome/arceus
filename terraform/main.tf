@@ -35,9 +35,9 @@ resource "docker_image" "miromie-app-auth" {
     platform = "linux/amd64" # currently image id is ecs-optimized x86_64 linux. To change to arm.
   }
 
-#  triggers = {
-#    dir_sha1 = sha1(join("", [for f in fileset("${path.cwd}/app", "auth/*") : filesha1(f)]))
-#  }
+  triggers = {
+    redeployment = true
+  }
 }
 
 # Upload to ecr
