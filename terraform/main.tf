@@ -35,9 +35,6 @@ resource "docker_image" "miromie-app-auth" {
     platform = "linux/amd64" # currently image id is ecs-optimized x86_64 linux. To change to arm.
   }
 
-  triggers = {
-    redeployment = true
-  }
 }
 
 # Upload to ecr
@@ -178,10 +175,7 @@ resource "aws_ecs_service" "ecs_service" {
   placement_constraints {
     type = "distinctInstance"
   }
-
-  triggers = {
-    redeployment = true
-  }
+  
   load_balancer {
     target_group_arn = aws_lb_target_group.ecs_tg_tls.arn
     container_name   = "app-first-task"

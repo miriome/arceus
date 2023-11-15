@@ -2,7 +2,7 @@ services:
   auth:
     build:
       context: ../app
-      dockerfile: ../app/auth/Dockerfile-dev
+      dockerfile: ../app/auth/Dockerfile
     ports:
       - "127.0.0.1:12345:12345"
 #    volumes: # For air to work.
