@@ -160,6 +160,7 @@ resource "aws_security_group" "security_group" {
 }
 
 
+
 resource "aws_ecs_service" "ecs_service" {
   name            = "miromie-ecs-service"
   cluster         = aws_ecs_cluster.miromie-app-ecs-cluster.id
@@ -171,7 +172,7 @@ resource "aws_ecs_service" "ecs_service" {
     security_groups = [aws_security_group.security_group.id]
   }
 
-  force_new_deployment = true
+#  force_new_deployment = true
   placement_constraints {
     type = "distinctInstance"
   }
@@ -223,7 +224,6 @@ resource "aws_autoscaling_group" "ecs_asg" {
   max_size            = 2
   min_size            = 1
 
-
   launch_template {
     id      = aws_launch_template.ecs_lt.id
     version = "$Latest"
@@ -235,10 +235,10 @@ resource "aws_autoscaling_group" "ecs_asg" {
     propagate_at_launch = true
   }
 }
-# EC2 launch template. image id is ecs-optimized x86_64 linux. To change to arm.
+# EC2 launch template. image id is ecs-optimized x86_64 linux 2. To change to arm.
 resource "aws_launch_template" "ecs_lt" {
   name_prefix   = "ecs-miromie"
-  image_id      = "ami-0844550712536a33b"
+  image_id      = "ami-080cdc1184ac6b4fa"
   instance_type = "t3.micro"
 
 #  key_name               = "ec2ecsglog"
@@ -263,7 +263,27 @@ resource "aws_launch_template" "ecs_lt" {
   }
 
   user_data     = base64encode("#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.miromie-app-ecs-cluster.name} >> /etc/ecs/ecs.config")
+  key_name = "winson-key"
 
+}
+
+resource "aws_vpc_peering_connection" "miromie-db-vpc-peer" {
+  peer_vpc_id   = "vpc-00f8d0f9524f4ed1a"
+  vpc_id        = aws_vpc.miromie-vpc.id
+  auto_accept = true
+
+  accepter {
+    allow_remote_vpc_dns_resolution = true
+  }
+
+#  requester {
+#    allow_remote_vpc_dns_resolution = true
+#  }
+}
+
+resource "aws_key_pair" "winson-key" {
+  key_name   = "winson-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsnLBoUkc5kmDiMImD37SXHbQseFxwGzZQRCibYtISjqH6A9GRa2dgPan+ipWLhR97Z3TeZ5zQVUawEtl/4fmsTu/K0VkNvvFTbaQQsIFcYILc1IgjEQmMxImPV5bPH6TkR4QOPvCv//flLcv3HqRkzW1bnZeLdC3RO9ao9cpIyaU9qUxV0/EBsNttPljwmGjVEAyiHVl1yGaltUHnSkMKTKxqJPIPn1vHWxJXXJmPM8d+bNQciPHQCaZ3xFuqmpQipYTC45Uw+fjXuNpgE/pbWZgLWwVWVAfpjtI5edeWLIpQSAmrFLBVKSBrR+ZSnvvKKfLQi3do7Cp8gAJFnz5RSZkKO1EwmkLXYKzVadRS3Vfb340I5Yhpx1LwOsh/fKCjTQWbXxSvKUlxcJQJAWBOz3xIajWkCoAOGFtnu72qHE3n3LnL+7AK9fMQ37vMsfpj3HxG7am3D2Gp8UYwa+XDM/RV5iUKwO+cqeJOp9DhCVLye1UrGJOxg3pYLTzKL28= winson.heng@Winsons-MacBook-Air.local"
 }
 
 
