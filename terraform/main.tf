@@ -35,6 +35,10 @@ resource "docker_image" "miromie-app-auth" {
     platform = "linux/amd64" # currently image id is ecs-optimized x86_64 linux. To change to arm.
   }
 
+  triggers = {
+    dir_sha1 = sha1(join("", [for f in fileset(path.cwd, "auth/*") : filesha1(f)]))
+  }
+
 }
 
 # Upload to ecr
@@ -78,13 +82,6 @@ resource "aws_ecs_task_definition" "app_task" {
   cpu                      = 256         # Specify the CPU the container requires
 }
 
-resource "aws_vpc" "miromie-vpc" {
-
-  cidr_block = "10.0.0.0/16"
-  tags = {
-    Name = "miromie-vpc"
-  }
-}
 
 data "aws_availability_zones" "miromie-AZ" {
 
@@ -137,27 +134,6 @@ resource "aws_route_table_association" "subnet2_route" {
   route_table_id = aws_route_table.miromie-route_table.id
 }
 
-# Create security group. Currenly allows connection form any and all ports.
-resource "aws_security_group" "security_group" {
-  name   = "ecs-security-group"
-  vpc_id = aws_vpc.miromie-vpc.id
-
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = -1
-    self        = "false"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "any"
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
 
 
 
@@ -172,7 +148,7 @@ resource "aws_ecs_service" "ecs_service" {
     security_groups = [aws_security_group.security_group.id]
   }
 
-#  force_new_deployment = true
+  force_new_deployment = true
   placement_constraints {
     type = "distinctInstance"
   }
@@ -267,19 +243,6 @@ resource "aws_launch_template" "ecs_lt" {
 
 }
 
-resource "aws_vpc_peering_connection" "miromie-db-vpc-peer" {
-  peer_vpc_id   = "vpc-00f8d0f9524f4ed1a"
-  vpc_id        = aws_vpc.miromie-vpc.id
-  auto_accept = true
-
-  accepter {
-    allow_remote_vpc_dns_resolution = true
-  }
-
-#  requester {
-#    allow_remote_vpc_dns_resolution = true
-#  }
-}
 
 resource "aws_key_pair" "winson-key" {
   key_name   = "winson-key"
