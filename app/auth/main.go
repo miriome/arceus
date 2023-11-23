@@ -29,7 +29,7 @@ func main() {
 	dbName := viper.Get("DB_NAME")
 	host := viper.Get("DB_HOST")
 	port := viper.GetInt("DB_PORT")
-	fmt.Printf("Getting db from host: %s, port: %d", host, port)
+	fmt.Printf("Getting db from host: %s, port: %d\n", host, port)
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s",
 		host, port, user, password, dbName)
