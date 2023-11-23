@@ -18,4 +18,5 @@ RUN go mod download
 RUN go install github.com/cosmtrek/air@latest
 
 EXPOSE 12345
+EXPOSE 5432
 CMD air
