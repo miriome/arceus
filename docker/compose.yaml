@@ -1,0 +1,23 @@
+services:
+  auth:
+    build:
+      context: ../app
+      dockerfile: ../app/auth/Dockerfile-dev
+    ports:
+      - "127.0.0.1:12345:12345"
+#    volumes: # For air to work.
+#      - ../app/auth:/auth/auth
+#      - ../app/middleware:/auth/middleware
+
+# network mode doesnt work on mac wtf
+
+#  nginx:
+#    image: nginx:latest
+#    container_name: dev-nginx
+#    ports:
+#      - 50001:80
+##    volumes:
+##      - ./nginx.conf:/etc/nginx/nginx.conf
+#    network_mode: host
+#    depends_on:
+#      - auth

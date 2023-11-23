@@ -3,17 +3,22 @@ package main
 import (
 	connect "arceus/app/common/gen/protobuf/protobufconnect"
 	"arceus/app/common/server"
-	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/h2c"
+	"fmt"
 	"net/http"
+	"os"
+	"path/filepath"
 )
 
 func main() {
 
 	sv := &server.Server{} // implements Server interface
 	mux := http.NewServeMux()
-	path, handler := connect.NewHelloWorldServiceHandler(sv)
-	mux.Handle(path, handler)
+	workFile := os.Getenv("GOWORK")
+	workPath := filepath.Dir(workFile)
 
-	http.ListenAndServe(":8080", h2c.NewHandler(mux, &http2.Server{}))
+	path, handler := connect.NewHelloWorldServiceHandler(sv)
+
+	mux.Handle(path, handler)
+	http.ListenAndServeTLS(":50001", fmt.Sprintf("%v/localhost.cert", workPath), fmt.Sprintf("%v/localhost.key", workPath), handler)
+
 }
