@@ -37,6 +37,7 @@ resource "docker_image" "miromie-app-auth" {
 
   triggers = {
     dir_sha1 = sha1(join("", [for f in fileset(path.cwd, "auth/*") : filesha1(f)]))
+    env_sha1 = sha1("${path.cwd}/app/auth/prod.toml")
   }
 
 }
@@ -44,6 +45,11 @@ resource "docker_image" "miromie-app-auth" {
 # Upload to ecr
 resource "docker_registry_image" "miromie-app-auth-registry-push" {
   name = docker_image.miromie-app-auth.name
+  triggers = {
+    dir_sha1 = sha1(join("", [for f in fileset(path.cwd, "auth/*") : filesha1(f)]))
+    env_sha1 = sha1("${path.cwd}/app/auth/prod.toml")
+  }
+  depends_on = [docker_image.miromie-app-auth]
 
 }
 
